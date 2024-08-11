@@ -12,6 +12,14 @@ const { configure } = require('quasar/wrappers')
 
 module.exports = configure(function (/* ctx */) {
   return {
+    eslint: {
+      fix: true,
+      // include = [],
+      // exclude = [],
+      // rawOptions = {},
+      warnings: true,
+      errors: true
+    },
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
     // preFetch: true,
 
@@ -49,7 +57,7 @@ module.exports = configure(function (/* ctx */) {
         node: 'node20'
       },
 
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
+      vueRouterMode: 'history', // available values: 'hash', 'history'
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
