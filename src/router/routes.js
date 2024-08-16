@@ -2,8 +2,16 @@ const routes = [
   {
     path: '/',
     component: () => import('layouts/Main/MainLayout.vue'),
+    meta: { requireAuth: true, visitor: false },
     children: [
-      { path: '', component: () => import('pages/main/IndexPage.vue') }
+      { path: '', redirect: '/apem' },
+      {
+        path: '/apem',
+        name: 'apem',
+        // component: () => import('pages/IndexPage.vue')
+        component: () => import('pages/IndexPage.vue')
+      },
+      { path: '/dashboard', name: 'dashboard', component: () => import('pages/main/IndexPage.vue') }
     ]
   },
 

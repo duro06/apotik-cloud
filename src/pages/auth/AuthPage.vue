@@ -33,14 +33,14 @@
             dense
             label="email"
             validator="email"
-            icon="icon-mat-email"
+            icon="email"
           />
           <app-input
             v-model="form.password"
             dense
             type="password"
             label="password"
-            icon="icon-mat-key"
+            icon="key"
             class="q-mt-sm"
           />
 
@@ -52,6 +52,20 @@
               label="Login"
             />
           </div>
+          <div style="margin-top: 10px; z-index: 10">
+              <q-btn
+                :loading="storeAuth.loading"
+                class="full-width"
+                color="white"
+                rounded
+                @click="loginGoogle"
+              >
+              <img src="~assets/logos/google.png"
+              ratio="16/9"
+              height="20px"
+              >
+            </q-btn>
+            </div>
         </q-form>
       </q-card-section>
       <div
@@ -74,6 +88,7 @@
 import { ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { useAuthStore } from 'src/stores/auth'
+import { base } from 'src/boot/axios'
 
 const storeAuth = useAuthStore()
 const $q = useQuasar()
@@ -87,8 +102,13 @@ const form = ref({
 
 function onSubmit () {
   storeAuth.login(form.value).then(() => {
-    window.location.reload()
+    // window.location.reload()
   })
+}
+function loginGoogle () {
+  const redirect = base + '/auth/google/redirect'
+  window.open(redirect, '_blank')
+  console.log('login google', base)
 }
 </script>
 
@@ -116,7 +136,7 @@ function onSubmit () {
   &::after {
     content: '';
     width: 784px;
-    height: 355px;
+    height: 555px;
     position: absolute;
     top: 288px;
     left: -70px;

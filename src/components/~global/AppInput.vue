@@ -41,7 +41,7 @@
       #append
     >
       <q-icon
-        :name="typeInput==='password'? 'icon-mat-visibility_off':'icon-mat-visibility'"
+        :name="typeInput==='password'? 'visibility_off':'visibility'"
         size="18px"
         class="cursor-pointer"
         @click="changeType"

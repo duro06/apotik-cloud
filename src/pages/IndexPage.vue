@@ -1,15 +1,35 @@
 <template>
-  <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    >
+  <q-page class="q-pa-lg">
+    <q-card class="full-width">
+      <q-card-section>
+        <app-loading />
+      </q-card-section>
+    </q-card>
   </q-page>
 </template>
 
 <script setup>
-defineOptions({
-  name: 'IndexPage'
-})
+import { routerInstance } from 'src/boot/router'
+import { useAuthStore } from 'src/stores/auth'
+
+const slug = 'apem'
+const user = useAuthStore().user
+// console.log(user)
+switch (user.role) {
+  case 'kasir':
+    // console.log('kasir', user.role)
+    routerInstance.replace({ name: 'transaksi.penjualan', params: { slug } })
+    break
+  case 'gudang':
+    // console.log('gudang', user.role)
+    routerInstance.replace({ name: 'transaksi.pembelian', params: { slug } })
+    break
+
+  default:
+    // console.log('default', user.role)
+    routerInstance.replace({ name: 'dashboard' })
+    // routerInstance.replace({ path: '/test' })
+
+    break
+}
 </script>

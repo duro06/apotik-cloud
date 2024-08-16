@@ -3,7 +3,8 @@ import axios from 'axios'
 import { getLocalToken } from 'src/modules/storage'
 import { notifErr } from 'src/modules/utils'
 
-const base = 'http://localhost/src/public' // local wawan
+// const base = 'http://localhost/src/public' // local wawan
+const base = 'http://localhost:8000' // local wawan
 
 const SERVER = base + '/api'
 const imageSever = base + '/storage/'
@@ -59,4 +60,4 @@ const setToken = (token) => {
 }
 const deleteToken = () => delete api.defaults.headers.common.Authorization
 
-export { axios, api, web, setToken, deleteToken, imageSever }
+export { axios, api, web, setToken, deleteToken, imageSever, SERVER, base }
