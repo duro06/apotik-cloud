@@ -4,7 +4,8 @@ import { getLocalToken } from 'src/modules/storage'
 import { notifErr } from 'src/modules/utils'
 
 // const base = 'http://localhost/src/public' // local wawan
-const base = 'http://localhost:8000' // local wawan
+// const base = 'http://localhost:8000' // local wawan
+const base = 'http://192.168.0.109/src/public' // local wawan
 
 const SERVER = base + '/api'
 const imageSever = base + '/storage/'

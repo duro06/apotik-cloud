@@ -102,7 +102,7 @@ const form = ref({
 
 function onSubmit () {
   storeAuth.login(form.value).then(() => {
-    // window.location.reload()
+    window.location.reload()
   })
 }
 function loginGoogle () {

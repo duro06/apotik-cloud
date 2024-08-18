@@ -79,6 +79,7 @@ export const useAuthStore = defineStore('auth', {
           this.REMOVE_LOKAL()
           routerInstance.replace('/login')
           waitLoad('done')
+          return new Promise(resolve => { resolve(resp) })
         })
       } catch (error) {
         // console.log('error ', error)

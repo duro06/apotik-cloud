@@ -11,7 +11,8 @@ const routes = [
         // component: () => import('pages/IndexPage.vue')
         component: () => import('pages/IndexPage.vue')
       },
-      { path: '/dashboard', name: 'dashboard', component: () => import('pages/main/IndexPage.vue') }
+      { path: '/dashboard', name: 'dashboard', component: () => import('pages/main/IndexPage.vue') },
+      { path: '/report', name: 'report', component: () => import('pages/report/IndexPage.vue') }
     ]
   },
 
