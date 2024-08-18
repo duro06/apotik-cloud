@@ -12,10 +12,13 @@ export const useReportStore = defineStore('report_store', {
     loadingAmbil: false,
     reports: [],
     options: [],
-    selctModel: ''
+    selctModel: '',
+    dashboards: [],
+    header: {}
   }),
   actions: {
     getSavedReports (val) {
+      this.dashboards = []
       const param = {
         params: {
           q: val
@@ -32,6 +35,23 @@ export const useReportStore = defineStore('report_store', {
             this.options = filterDuplicateArrays(tgl)
             this.selctModel = tgl[0]
             this.reports = resp?.data
+            this.options.forEach(op => {
+              const data = this.reports.filter(f => f.tgl === op)
+              if (data.length) {
+                data.forEach(da => {
+                  da.labarugi = da?.laporan?.labaRugi
+                })
+                const lR = data.reduce((a, b) => parseFloat(a) + parseFloat(b?.labarugi), 0)
+                console.log('data', data.map(m => m.labarugi), lR)
+                const temp = {
+                  labaRugi: lR,
+                  tgl: data[0].tgl,
+                  header: data[0].header
+                }
+                this.dashboards.push(temp)
+              }
+            })
+            console.log('dash', this.dashboards)
             this.makeReport(resp?.data, tgl[0])
             resolve(resp?.data)
           })
@@ -45,6 +65,8 @@ export const useReportStore = defineStore('report_store', {
       ]
       const report = val
       console.log('tgl', tgl)
+      const head = report.find(f => f.tgl === tgl)
+      this.header = head?.header
       if (report?.length) {
         const kodecabang = filterDuplicateArrays(report.map(m => m.kodecabang))
         const laporan = {}

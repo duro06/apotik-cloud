@@ -3,7 +3,7 @@
     <div class="row full-width q-col-gutter-sm q-mb-xs items-center justify-between">
       <div class="col-auto" style="min-width: 100px; max-width: 50%;">
         <q-select v-model="store.selctModel"
-        label="pilih tanggal"
+        label="pilih tanggal laporan"
         dense
         outlined
         clearable
@@ -25,6 +25,9 @@
         @click="bukaDialog"
         />
       </div>
+    </div>
+    <div class="row q-my-xs">
+      Periode Data : {{ dateHalfFormat( store?.header?.from) }} - {{ dateHalfFormat( store?.header?.to) }}
     </div>
     <div class="row">
       <q-tabs
@@ -61,6 +64,7 @@
 </template>
 <script setup>
 import { api } from 'src/boot/axios'
+import { dateHalfFormat } from 'src/modules/formatter'
 import { notifSuccess } from 'src/modules/utils'
 import { useReportStore } from 'src/stores/report/report'
 import { defineAsyncComponent, onMounted, ref } from 'vue'
