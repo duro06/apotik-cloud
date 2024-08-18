@@ -52,7 +52,7 @@
               label="Login"
             />
           </div>
-          <div style="margin-top: 10px; z-index: 10">
+          <!-- <div style="margin-top: 10px; z-index: 10">
               <q-btn
                 :loading="storeAuth.loading"
                 class="full-width"
@@ -65,7 +65,7 @@
               height="20px"
               >
             </q-btn>
-            </div>
+            </div> -->
         </q-form>
       </q-card-section>
       <div
@@ -105,6 +105,7 @@ function onSubmit () {
     window.location.reload()
   })
 }
+// eslint-disable-next-line no-unused-vars
 function loginGoogle () {
   const redirect = base + '/auth/google/redirect'
   window.open(redirect, '_blank')
