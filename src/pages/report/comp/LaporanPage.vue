@@ -9,7 +9,7 @@
     </div>
     <div class="row items-center justify-between" style="border-bottom: 1px solid black;">
       <div class="col-6">Retur Penjualan</div>
-      <div class="col-6 text-right text-green">{{formatDouble( laporan?.returPenjualanP)}}</div>
+      <div class="col-6 text-right text-negative">{{formatDouble( laporan?.returPenjualanP)}}</div>
     </div>
     <div class="row items-center justify-between" style="border-bottom: 1px solid black;">
       <div class="col-6">Penjualan Bersih</div>
@@ -40,11 +40,11 @@
       <div class="col-6">Total Pengeluaran</div>
       <div class="col-6 text-right text-negative">{{formatDouble( laporan?.totBeban)}}</div>
     </div>
-    <div v-if="laporan?.labaRugi>0" class="row items-center justify-between" style="border-bottom: 1px solid black;">
+    <div v-if="laporan?.labaRugi>0" class="q-mt-md text-weight-bold row items-center justify-between" style="border-bottom: 1px solid black;">
       <div class="col-6">Laba Bersih</div>
-      <div class="col-6 text-right text-greed">{{formatDouble( laporan?.labaRugi)}}</div>
+      <div class="col-6 text-right text-green">{{formatDouble( laporan?.labaRugi)}}</div>
     </div>
-    <div v-if="laporan?.labaRugi<=0" class="row items-center justify-between" style="border-bottom: 1px solid black;">
+    <div v-if="laporan?.labaRugi<=0" class="q-mt-md text-weight-bold row items-center justify-between" style="border-bottom: 1px solid black;">
       <div class="col-6">Rugi</div>
       <div class="col-6 text-right text-negative">{{formatDouble( laporan?.labaRugi)}}</div>
     </div>

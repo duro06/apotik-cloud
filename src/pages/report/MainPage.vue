@@ -22,7 +22,7 @@
         color="primary"
         no-caps
         :loading="loadingKirimNotif"
-        @click="kirimNotif"
+        @click="bukaDialog"
         />
       </div>
     </div>
@@ -57,6 +57,7 @@
     </q-tab-panels>
     </div>
   </div>
+  <tanggal v-model="buka" position="top" @ganti-periode="gantiPeriode"/>
 </template>
 <script setup>
 import { api } from 'src/boot/axios'
@@ -64,17 +65,31 @@ import { notifSuccess } from 'src/modules/utils'
 import { useReportStore } from 'src/stores/report/report'
 import { defineAsyncComponent, onMounted, ref } from 'vue'
 const laporanPage = defineAsyncComponent(() => import('src/pages/report/comp/LaporanPage.vue'))
+const tanggal = defineAsyncComponent(() => import('src/pages/report/comp/PilihRangeTanggal.vue'))
 
+const buka = ref(false)
 const store = useReportStore()
 // const tab = ref('semua')
 // const tabs = ref([
 //   { label: 'Semua', name: 'semua', laporan: {} }
 // ])
 // kirim notif
+function bukaDialog () {
+  buka.value = true
+}
+function gantiPeriode (val) {
+  console.log('gantiPeriode', val)
+  buka.value = false
+  kirimNotif(val)
+}
 const loadingKirimNotif = ref(false)
-async function kirimNotif () {
+// eslint-disable-next-line no-unused-vars
+async function kirimNotif (val) {
+  const param = {
+    params: val
+  }
   loadingKirimNotif.value = true
-  await api.get('v1/report/send-notif-get-report')
+  await api.get('v1/report/send-notif-get-report', param)
     .then((resp) => {
       loadingKirimNotif.value = false
       console.log(resp?.data)
