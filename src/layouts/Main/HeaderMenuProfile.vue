@@ -66,7 +66,7 @@ const role = computed(() => {
 
 function signOut () {
   store.logout().then(() => {
-    window.location.reload()
+    // window.location.reload()
   })
 }
 </script>

@@ -23,12 +23,12 @@ export const useAuthStore = defineStore('auth', {
     userGetter: () => storage.getUser()
   },
   actions: {
-    async login (payload) {
+    login (payload) {
       this.loading = true
       waitLoad('show')
-      try {
-        await api.post('v1/auth/login', payload).then(resp => {
-          // console.log('login', resp.data)
+      return new Promise(resolve => {
+        api.post('v1/auth/login', payload).then(resp => {
+        // console.log('login', resp.data)
           storage.setLocalToken(resp.data.access_token)
           storage.setUser(resp.data.user)
           const hdd = storage.getLocalToken()
@@ -38,16 +38,17 @@ export const useAuthStore = defineStore('auth', {
           }
           this.loading = false
           waitLoad('done')
-          return new Promise(resolve => { resolve(resp) })
-          // eslint-disable-next-line no-undef
-          // redirect({ path: '/dashboard' })
+          resolve(resp)
+        // eslint-disable-next-line no-undef
+        // redirect({ path: '/dashboard' })
         })
-      } catch (error) {
-        waitLoad('done')
-        this.loading = false
-        // console.log('err login', error.response)
-        // notifErr(error.response)
-      }
+          .catch(() => {
+            waitLoad('done')
+            this.loading = false
+            // console.log('err login', error.response)
+            // notifErr(error.response)
+          })
+      })
     },
     SET_TOKEN_USER (token, user) {
       storage.setHeaderToken(token)
@@ -83,6 +84,7 @@ export const useAuthStore = defineStore('auth', {
         })
       } catch (error) {
         // console.log('error ', error)
+        this.REMOVE_LOKAL()
         waitLoad('done')
       }
     }

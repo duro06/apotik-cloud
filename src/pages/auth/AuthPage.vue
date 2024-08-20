@@ -89,6 +89,7 @@ import { ref } from 'vue'
 import { useQuasar } from 'quasar'
 import { useAuthStore } from 'src/stores/auth'
 import { base } from 'src/boot/axios'
+import { routerInstance } from 'src/boot/router'
 
 const storeAuth = useAuthStore()
 const $q = useQuasar()
@@ -102,7 +103,8 @@ const form = ref({
 
 function onSubmit () {
   storeAuth.login(form.value).then(() => {
-    window.location.reload()
+    // window.location.reload()
+    routerInstance.replace('/dashboard')
   })
 }
 // eslint-disable-next-line no-unused-vars
