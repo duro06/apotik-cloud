@@ -6,7 +6,8 @@ import { notifErr } from 'src/modules/utils'
 // const base = 'http://localhost/src/public' // local wawan
 // const base = 'http://localhost:8000' // local wawan
 // const base = 'http://192.168.0.109/src/public' // local wawan
-const base = 'http://103.23.199.134' // server
+// const base = 'http://103.23.199.134' // server
+const base = 'https://api.apotek-setiawan-group.my.id' // server
 
 const SERVER = base + '/api'
 const imageSever = base + '/storage/'
